@@ -17,6 +17,6 @@ auto data(const char* filename, const char* node_path) {
 }
 
 int main(void) {
-	std::wcout << data("D:/question.xml", "questionbook.questiondata.question") << std::endl;
+	std::wcout << data("question.xml", "questionbook.questiondata.question") << std::endl;
 	return 0;
 }
