@@ -36,7 +36,6 @@ auto read_question(const std::string& filename) {
 }
 int main(void) {
 	//std::wcout << data("question.xml", "questionbook.questiondata.question") << std::endl;
-	//std::wcout.imbue(std::locale(""));
 	const auto questions = read_question(u8"question.xml");
 	for (auto& s : questions) std::wcout << s << std::endl << std::endl;
 	return 0;
