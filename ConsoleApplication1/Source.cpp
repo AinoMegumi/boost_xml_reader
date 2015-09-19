@@ -12,17 +12,11 @@ template<typename T> void replace_all(std::basic_string<T>& str, const std::basi
 template<typename T> void replace_all(std::basic_string<T>& str, const T* old_str, const T* new_str) {
 	replace_all(str, std::basic_string<T>(old_str), std::basic_string<T>(new_str));
 }
-auto data(const char* filename, const char* node_path) {
-	boost::property_tree::ptree pt;
-	read_xml(filename, pt);
-	auto node = pt.get_optional<std::string>(node_path);
-	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>, wchar_t> convert;
-	return convert.from_bytes(node.get());
-}
 auto read_question(const std::string& filename) {
 	std::vector<std::wstring> re;
 	boost::property_tree::ptree pt;
 	read_xml(filename, pt);
+	static_assert(sizeof(wchar_t) == 2, "In function 'read_question' : Please check usage of 'std::codecvt_utf8_utf16'");
 	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>, wchar_t> convert;
 	for (auto& i : pt.get_child(u8"questionbook")) {
 		auto node_question = i.second.get_optional<std::string>(u8"question");
