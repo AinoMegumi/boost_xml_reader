@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <string>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
@@ -35,8 +35,17 @@ auto read_question(const std::string& filename) {
 	return re;
 }
 int main(void) {
-	//std::wcout << data("question.xml", "questionbook.questiondata.question") << std::endl;
-	const auto questions = read_question(u8"question.xml");
-	for (auto& s : questions) std::wcout << s << std::endl << std::endl;
+	try {
+#ifdef _MSC_VER
+		std::wcout.imbue(std::locale("japanese"));//locale設定
+#else
+		std::wcout.imbue(std::locale(""));//locale設定
+#endif
+		const auto questions = read_question(u8"question.xml");
+		for (auto& s : questions) std::wcout << s << std::endl << std::endl;
+	}
+	catch (std::exception& er) {
+		std::cerr << er.what() << std::endl;
+	}
 	return 0;
 }
