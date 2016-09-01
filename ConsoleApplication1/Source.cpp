@@ -4,6 +4,7 @@
 #include <boost/property_tree/xml_parser.hpp>
 #include <codecvt>
 #include <locale> 
+
 template<typename T> void replace_all(std::basic_string<T>& str, const std::basic_string<T>& old_str, const std::basic_string<T>& new_str) {
 	for (size_t i = str.find_first_of(old_str); std::string::npos != i; i = str.find(old_str, i + new_str.length())) {
 		str.replace(i, old_str.length(), new_str);
@@ -12,6 +13,7 @@ template<typename T> void replace_all(std::basic_string<T>& str, const std::basi
 template<typename T> void replace_all(std::basic_string<T>& str, const T* old_str, const T* new_str) {
 	replace_all(str, std::basic_string<T>(old_str), std::basic_string<T>(new_str));
 }
+
 auto read_question(const std::string& filename) {
 	std::vector<std::wstring> re;
 	boost::property_tree::ptree pt;
